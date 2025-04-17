@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome - Awsome Jungle Studios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Papyrus&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Papyrus', cursive;
+      background: linear-gradient(135deg, #1b1b1b, #2f4f2f);
+      color: white;
+      text-align: center;
+      background-image: url('hi.png'); /* Change to your background image */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .welcome-box {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #a3ff8f;
+    }
+
+    .whatsapp-btn, .go-btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .go-btn {
+      background-color: #007b3c;
+      display: none;
+    }
+
+    .whatsapp-btn:hover, .go-btn:hover {
+      background-color: #1ebc59;
+      transform: scale(1.05);
+    }
+
+    .message-box {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px dashed #90ee90;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #aaffaa;
+      white-space: pre-wrap;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <audio id="chimeSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7fd3c81282.mp3" preload="auto"></audio>
+
+  <div class="welcome-box">
+    <h1>Awesome Jungle Studios Welcomes you to the Forest of Cinemas</h1>
+    <p>Click the button below to receive your welcome message</p>
+    <button class="whatsapp-btn" id="showMsgBtn">Show Welcome Message</button>
+    <div class="message-box" id="userMessage"></div>
+    <button class="go-btn" id="redirectBtn">Join WhatsApp Group</button>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const age = params.get("age");
+    const gender = params.get("gender");
+    const job = params.get("job");
+
+    const message = `Copy this text and paste it in the WhatsApp group:\n\nHi, I just joined Awsome Jungle Studios!\nName: ${name}\nAge: ${age}\nGender: ${gender}\nJob: ${job}`;
+
+    const chime = document.getElementById("chimeSound");
+    const msgBox = document.getElementById("userMessage");
+    const showMsgBtn = document.getElementById("showMsgBtn");
+    const redirectBtn = document.getElementById("redirectBtn");
+
+    showMsgBtn.addEventListener("click", function () {
+      chime.play();
+      msgBox.textContent = message;
+      msgBox.style.display = "block";
+      showMsgBtn.style.display = "none";
+      redirectBtn.style.display = "inline-block";
+    });
+
+    redirectBtn.addEventListener("click", function () {
+      window.open("https://chat.whatsapp.com/DjXLSaOxqNV8RhFPYa7yE2", "_blank");
+    });
+  </script>
+</body>
+</html>
